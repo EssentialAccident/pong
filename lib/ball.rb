@@ -22,11 +22,20 @@ class Ball < Circle
 
   def update
     self.center = @center + @velocity
+    check_walls
   end
 
   def center=(vector)
     @center = vector
     @x = @center.x
     @y = @center.y
+  end
+
+  private
+
+  def check_walls
+    top_border = @center.y - @radius
+    bottom_border = @center.y + @radius
+    @velocity = Vector2d.new(@velocity.x, @velocity.y * -1) if top_border < 0 || bottom_border > WINDOW_HEIGHT
   end
 end
