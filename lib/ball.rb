@@ -7,13 +7,26 @@ class Ball < Circle
   # Parameters
   # center - Vector2d - Position of the center of the ball
   # speed - integer - It will determine the speed of the ball
-  def initialize(center, speed = 10, size = 10)
+  def initialize(center, speed = 2, size = 10)
     @center = center
     super({ x: @center.x,
             y: @center.y,
             radius: size,
             color: COLOR })
 
-    @velocity = Vector2d(rand + speed, rand + speed)
+    # The balls initial velocity is calculated based on angle
+    # The ball will move towards that angle at the balls determined speed
+    angle = rand(360) * (Math::PI / 180)
+    @velocity = Vector2d(Math.cos(angle) * speed, Math.sin(angle) * speed)
+  end
+
+  def update
+    self.center = @center + @velocity
+  end
+
+  def center=(vector)
+    @center = vector
+    @x = @center.x
+    @y = @center.y
   end
 end

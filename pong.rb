@@ -32,4 +32,9 @@ on :key do |event|
     close
   end
 end
+
+# Update loop
+update do
+  ball.update
+end
 show
