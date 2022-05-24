@@ -7,6 +7,7 @@ class Ball < Circle
   # Parameters
   # center - Vector2d - Position of the center of the ball
   # speed - integer - It will determine the speed of the ball
+  # size - integer - Size (radius) of the ball
   def initialize(center, speed = 2, size = 10)
     @center = center
     super({ x: @center.x,
@@ -20,11 +21,13 @@ class Ball < Circle
     @velocity = Vector2d(Math.cos(angle) * speed, Math.sin(angle) * speed)
   end
 
+  # It keeps moving the ball
   def update
     self.center = @center + @velocity
     check_walls
   end
 
+  # Updates the center and the position of the ball
   def center=(vector)
     @center = vector
     @x = @center.x
@@ -33,6 +36,7 @@ class Ball < Circle
 
   private
 
+  # Check collision of the ball with the upper and lower balls
   def check_walls
     top_border = @center.y - @radius
     bottom_border = @center.y + @radius

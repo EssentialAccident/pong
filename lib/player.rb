@@ -9,7 +9,9 @@ THICKNESS = 15
 class Player < Rectangle
   # Initialize method
   # Parameters
-  # Side - which side is the player in :left or :right
+  # Side - symbol - which side is the player in :left or :right
+  # Size - integer - The size (height) of the paddle
+  # Speed - integer - The speed in pixels that the paddle would move
   def initialize(side, size = 200, speed = 5)
     @side = side
     @size = size
@@ -45,12 +47,17 @@ class Player < Rectangle
 
   private
 
+  # Updates the grapics after movement have been done
   def update_graphics
     self.y = @center.y - (@size / 2)
+
+    # Check collision with upper wall
     if @y < 0
       self.y = 0
       @center = Vector2d.new(@center.x, @y + (@size / 2))
     end
+
+    # Check collision with lower wall
     if @y + @size > WINDOW_HEIGHT
       self.y = WINDOW_HEIGHT - @size
       @center = Vector2d.new(@center.x, @y + (@size / 2))
