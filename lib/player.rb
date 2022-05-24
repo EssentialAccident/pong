@@ -47,5 +47,13 @@ class Player < Rectangle
 
   def update_graphics
     self.y = @center.y - (@size / 2)
+    if @y < 0
+      self.y = 0
+      @center = Vector2d.new(@center.x, @y + (@size / 2))
+    end
+    if @y + @size > WINDOW_HEIGHT
+      self.y = WINDOW_HEIGHT - @size
+      @center = Vector2d.new(@center.x, @y + (@size / 2))
+    end
   end
 end
