@@ -25,12 +25,23 @@ set width: WINDOW_WIDTH, height: WINDOW_HEIGHT
 # Ball
 # Creates the ball in the middle of the screen
 ball = Ball.new(Vector2d.new(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
-player1 = Player.new(:left)
-player2 = Player.new(:right)
+left_player = Player.new(:left)
+right_player = Player.new(:right)
 
 # Keyboard input
 on :key do |event|
   case event.key
+  # Player movement
+  when 'up'
+    right_player.move_up
+  when 'down'
+    right_player.move_down
+  when 'w'
+    left_player.move_up
+  when 's'
+    left_player.move_down
+
+  # Closing the game
   when 'escape'
     close
   end
