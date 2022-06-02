@@ -17,7 +17,7 @@ class Ball < Circle
 
     # The balls initial velocity is calculated based on angle
     # The ball will move towards that angle at the balls determined speed
-    angle = rand(360) * (Math::PI / 180)
+    angle = initial_angle * (Math::PI / 180)
     @velocity = Vector2d(Math.cos(angle) * speed, Math.sin(angle) * speed)
   end
 
@@ -41,5 +41,16 @@ class Ball < Circle
     top_border = @center.y - @radius
     bottom_border = @center.y + @radius
     @velocity = Vector2d.new(@velocity.x, @velocity.y * -1) if top_border < 0 || bottom_border > WINDOW_HEIGHT
+  end
+
+  # Calculates the angle in which the ball starts
+  def initial_angle
+    side = %i[left right]
+    case side.sample
+    when :left
+      rand(135...225)
+    when :right
+      rand(-45...45)
+    end
   end
 end
